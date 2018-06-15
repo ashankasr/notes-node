@@ -4,7 +4,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const yards = require('yargs');
 
-const notes1 = require('./notes1.js');
+const notes1 = require('./notes.js');
 
 var argv = yards.argv;
 //var command = process.argv[2];
