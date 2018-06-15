@@ -6,8 +6,9 @@ const yards = require('yargs');
 
 const notes1 = require('./notes1.js');
 
-var command = process.argv[2];
 var argv = yards.argv;
+//var command = process.argv[2];
+var command = argv._[0];
 
 if (command === "add") {
     notes1.addNote(argv.title, argv.body);
