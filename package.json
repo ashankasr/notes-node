@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "nodemon app.js"
+    "run-watch": "nodemon app.js",
+    "run": "node app.js",
+    "debug": "node --inspect-brk app.js"
   },
   "repository": {
     "type": "git",
