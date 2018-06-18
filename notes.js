@@ -4,9 +4,24 @@ var saveNotes = (notes) => {
     fs.writeFileSync("notes-data.json", JSON.stringify(notes));
 };
 
+var fetchAll = () => {
+
+    var notes = [];
+    try {
+        if (fs.existsSync("notes-data.json")) {
+            notes = JSON.parse(fs.readFileSync("notes-data.json"));
+        }
+    }
+    catch {
+
+    }
+
+    return notes;
+};
+
 var addNote = (title, body) => {
 
-    var notes = getAll();
+    var notes = fetchAll();
 
     note = {
         title,
@@ -24,25 +39,20 @@ var addNote = (title, body) => {
 };
 
 var getAll = () => {
+    const notes = fetchAll();
+    console.log(`Printing ${notes.length} note(s).`);
 
-    var notes = [];
-    try {
-        if (fs.existsSync("notes-data.json")) {
-            notes = JSON.parse(fs.readFileSync("notes-data.json"));
-        }
-    }
-    catch {
+    notes.forEach(note => {
+        logNote(note);
+    });
 
-    }
-
-    return notes;
 };
 
 var getNote = (title) => {
 
     var note = null;
 
-    const notes = getAll();
+    const notes = fetchAll();
 
     const filteredNotes = notes.filter(r => r.title.toLowerCase() === title.toLowerCase())
 
@@ -54,7 +64,7 @@ var getNote = (title) => {
 };
 
 var removeNote = (title) => {
-    var notes = getAll();
+    var notes = fetchAll();
     var filteredNotes = notes.filter(r => r.title.toLowerCase() !== title.toLowerCase());
     saveNotes(filteredNotes);
 };
