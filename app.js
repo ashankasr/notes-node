@@ -4,23 +4,35 @@ const fs = require('fs');
 const _ = require('lodash');
 const yards = require('yargs');
 
-const notes1 = require('./notes.js');
+const notes = require('./notes.js');
 
 var argv = yards.argv;
 //var command = process.argv[2];
 var command = argv._[0];
 
 if (command === "add") {
-    notes1.addNote(argv.title, argv.body);
+    var title = String(argv.title);
+    var body = String(argv.body);
+
+    notes.addNote(title, body);
 }
 else if (command === 'list') {
-    notes1.getAll();
+    notes.getAll();
 }
 else if (command === 'read') {
-    notes1.getNote(argv.title);
+    var title = String(argv.title);
+    var note = notes.getNote(title);
+
+    if (note) {
+        notes.logNote(note);
+    } else {
+        console.log('Note not found');
+    }
+
 }
 else if (command === 'remove') {
-    notes1.removeNote(argv.title);
+    var title = String(argv.title);
+    notes.removeNote(title);
 }
 else {
     console.log('Command does recognized');
